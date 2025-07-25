@@ -28,6 +28,15 @@ public:
     std::string getSeedByIndex(int index) const;
     // checks if inventory is empty
     bool isInventoryEmpty() const;
+
+    // current amount of money
+    int getMoney() const;
+
+    // adds money to the player's total
+    void addMoney(int amount);
+
+    // deducts money from the player
+    void deductMoney(int amount);
 };
 
 #endif

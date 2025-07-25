@@ -3,8 +3,8 @@
 using namespace std;
 
 // constructor with all default values for a new plant
-Plant::Plant(const std::string &name)
-    : name(name), planted(false), waterLevel(0), stage(GrowthStage::Seedling),
+Plant::Plant(const std::string &name, int price, const std::string &rarity)
+    : name(name), price(price), rarity(rarity), planted(false), waterLevel(0), stage(GrowthStage::Seedling),
       hasPests(false), hasWeeds(false),
       pestDamageCount(0), weedDamageCount(0), alive(true)
 {
@@ -96,8 +96,6 @@ std::string Plant::getStageName() const
     {
     case GrowthStage::Seedling:
         return "Seedling 🌱";
-    case GrowthStage::Budding:
-        return "Budding 🌿";
     case GrowthStage::Blooming:
         return "Blooming 🌸";
     case GrowthStage::Mature:

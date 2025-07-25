@@ -7,7 +7,6 @@
 enum class GrowthStage
 {
     Seedling,
-    Budding,
     Blooming,
     Mature,
     Dead
@@ -18,6 +17,11 @@ class Plant
 protected:
     // name of the plant
     std::string name;
+
+    // add plant's price and rarity
+    int price;
+    std::string rarity;
+
     int waterLevel;
     GrowthStage stage;
     bool hasPests;
@@ -37,7 +41,8 @@ private:
     bool planted; // plant status
 
 public:
-    Plant(const std::string &name);
+    // constructor
+    Plant(const std::string &name, int price, const std::string &rarity);
     virtual ~Plant() {}
 
     // logic to move to the next growth stage
@@ -59,22 +64,25 @@ public:
     std::string getStageName() const;
 
     // pests
-    void applyPestDamage(); // flags plant as having pests
-    void increasePestDamage();  // increases pest damage count
-    void clearPests();  // removes pests
-    bool checkPests() const;    // checks if pests are present
+    void applyPestDamage();    // flags plant as having pests
+    void increasePestDamage(); // increases pest damage count
+    void clearPests();         // removes pests
+    bool checkPests() const;   // checks if pests are present
 
     // weeds
-    void applyWeedGrowth(); // flags plant as having weeds
-    void increaseWeedDamage();  // increases weed damage count
-    void clearWeeds();  // removes weeds
-    bool checkWeeds() const;    // checks if weeds are present
+    void applyWeedGrowth();    // flags plant as having weeds
+    void increaseWeedDamage(); // increases weed damage count
+    void clearWeeds();         // removes weeds
+    bool checkWeeds() const;   // checks if weeds are present
 
-    bool isAlive() const;   // whether the plant is alive
-    void reset();   // resets plant to initial state
+    bool isAlive() const; // whether the plant is alive
+    void reset();         // resets plant to initial state
 
-    void plant();   // marks the plant as planted
+    void plant();           // marks the plant as planted
     bool isPlanted() const; // checks if it's planted
+
+    int getPrice() const { return price; }           // gets the price of each plant
+    std::string getRarity() const { return rarity; } // gets the rarity of each plant
 };
 
 #endif

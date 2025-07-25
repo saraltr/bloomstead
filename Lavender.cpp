@@ -1,19 +1,19 @@
-#include "Rose.h"
+#include "Lavender.h"
 #include <iostream>
 
-Rose::Rose() : Plant("Rose", 10, "Uncommon") {}
+Lavender::Lavender() : Plant("Lavender", 10, "Uncommon") {}
 
-int Rose::nextStage() const
+int Lavender::nextStage() const
 {
     return 3;
 }
 
-std::string Rose::getType() const
+std::string Lavender::getType() const
 {
-    return "🌹 Rose";
+    return "🪻 Lavender";
 }
 
-void Rose::grow()
+void Lavender::grow()
 {
     if (!hasPests && !hasWeeds && waterLevel >= nextStage())
     {

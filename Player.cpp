@@ -24,7 +24,6 @@ void Player::useSeed(std::string type)
     if (hasSeed(type))
     {
         seedInventory[type]--;
-        std::cout << "🌿 Planted one " << type << " seed.\n";
         if (seedInventory[type] == 0)
         {
             seedInventory.erase(type);
@@ -75,4 +74,22 @@ std::string Player::getSeedByIndex(int index) const
         current++;
     }
     return "";
+}
+
+// returns the current amount of money
+int Player::getMoney() const
+{
+    return money;
+}
+
+// subtracts money from the player
+void Player::deductMoney(int amount)
+{
+    money -= amount;
+}
+
+// adds money to the player's total
+void Player::addMoney(int amount)
+{
+    money += amount;
 }
