@@ -9,8 +9,11 @@
 #include "Garden.h"
 #include "Carrot.h"
 #include "Rose.h"
+#include "Lavender.h"
+#include "Sunflower.h"
 #include "Lunaria.h"
 #include "Player.h"
+#include "Market.h"
 
 using namespace std;
 
@@ -77,9 +80,9 @@ void handleWater(Garden &garden, int &energy)
 void handleHarvest(Garden &garden, Player &player, int &energy)
 {
   performActionIfEnergy(energy, [&]()
-    {
-      garden.harvestMaturePlants(player); // harvest seeds and add to player's inventory
-    });
+                        {
+                          garden.harvestMaturePlants(player); // harvest seeds and add to player's inventory
+                        });
 }
 
 // factory map for creating plants by seed name
@@ -92,7 +95,10 @@ Plant *createPlant(const string &seed)
        { return new Rose(); }},
       {"Lunaria", []()
        { return new Lunaria(); }},
-  };
+      {"Sunflower", []()
+       { return new Sunflower(); }},
+      {"Lavender", []()
+       { return new Lavender(); }}};
   auto it = factory.find(seed);
   if (it != factory.end())
     return it->second();
@@ -238,6 +244,7 @@ int main()
 
   Player player;   // create player object
   Garden myGarden; // create garden object
+  Market market;   // create market object
 
   // add initial plants to garden
   bool tutorial = true;
@@ -248,6 +255,14 @@ int main()
     myGarden.addPlant(c);
 
     Rose *r = new Rose();
+    r->plant();
+    myGarden.addPlant(r);
+
+    c = new Carrot();
+    c->plant();
+    myGarden.addPlant(c);
+
+    r = new Rose();
     r->plant();
     myGarden.addPlant(r);
   }
@@ -283,6 +298,11 @@ int main()
          { handleTreatPests(myGarden, energy); }, myGarden.hasPests() && energy > 0},
         {"Remove weeds 🌾 (costs 1 energy)", [&]()
          { handleRemoveWeeds(myGarden, energy); }, myGarden.hasWeeds() && energy > 0},
+        {"Visit the market 🛒", [&]()
+         {
+           market.visitMarket(player, myGarden);
+         },
+         true},
         {"End day 🌙 (Restore energy & grow plants)", [&]()
          { handleEndDay(myGarden, player, energy); }, true},
         {"Exit 👋", [&]()

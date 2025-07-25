@@ -41,6 +41,8 @@ public:
     int removeDeadPlants(); // removes dead plants from garden and returns count removed
 
     void harvestMaturePlants(Player &player); // harvests seeds from mature plants and adds them to the player's inventory
+
+    void removePlant(Plant *plant); // remove specific plant
 };
 
 #endif

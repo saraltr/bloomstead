@@ -16,7 +16,7 @@ void Garden::addPlant(Plant *plant)
     plants.push_back(plant);
 }
 
-// waters every plant 
+// waters every plant
 void Garden::waterAllPlants()
 {
     for (auto p : plants)
@@ -200,5 +200,19 @@ void Garden::harvestMaturePlants(Player &player)
     if (!harvested)
     {
         std::cout << "❌ No mature plants available for harvest.\n";
+    }
+}
+
+// remove a specific plant
+void Garden::removePlant(Plant *plant)
+{
+    auto &plants = this->plants;
+    for (auto it = plants.begin(); it != plants.end(); ++it)
+    {
+        if (*it == plant)
+        {
+            plants.erase(it);
+            return;
+        }
     }
 }
